@@ -1,0 +1,75 @@
+.menu-wrapper {
+	/* box-shadow: 0 0 1px 0 #444; */
+	background: #fff;
+	/* background: #b9e6d3; */
+}
+
+.menu-link {
+	display: block;
+	height: 50px;
+	line-height: 50px;
+	padding-left: 50px;
+	text-decoration: none;
+	color: #6b6b6b;
+	outline: none;
+}
+
+.menu-link:hover {
+	color: #7ed3b2;
+	/* background: #eee; */
+}
+
+.menu-link.activated {
+	color: #7ed3b2;
+	/* background: #eee; */
+}
+
+.menu-wrapper-collapse {
+	width: 50px;
+	border-right: 1px solid rgb(238, 238, 238);
+	/* background: #b9e6d3; */
+}
+
+.menu-link-collapse {
+	display: block;
+	height: 50px;
+	line-height: 50px;
+	text-align: center;
+	text-decoration: none;
+	color: #6b6b6b;
+	position: relative;
+}
+
+.menu-link-collapse-title {
+	position: absolute;
+	left: 58px;
+	top: 13px;
+	background: rgba(0, 0, 0, 0.4);
+	color: #fff;
+	width: 100px;
+	height: 30px;
+	line-height: 30px;
+	font-size: 14px;
+	border-radius: 8px;
+}
+.menu-link-collapse-title::before {
+	content: '';
+	display: block;
+	height: 0px;
+	width: 0px;
+	position: absolute;
+	left: -16px;
+	top: 7px;
+	border: 8px solid;
+	border-color: transparent rgba(0, 0, 0, 0.4) transparent transparent;
+}
+
+.menu-link-collapse.activated {
+	color: #7ed3b2;
+	/* background: #eee; */
+}
+
+.menu-link-collapse:hover {
+	color: #7ed3b2;
+	/* background: #eee; */
+}
