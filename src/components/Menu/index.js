@@ -62,7 +62,7 @@ Menu.defaultProps = {
 		link: '/dashboard'
 	}, {
 		name: '个人中心',
-		link: '/other'
+		link: '/user'
 	}],
 	width: '200px',
 	isCollapse: false
