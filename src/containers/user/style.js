@@ -12,13 +12,14 @@ export const UserHeader = styled.div`
 	display: flex;
 	box-shadow: 0 1px 11px 0 rgba(0, 0, 0, 0.12);
 	border-radius: 5px;
+	margin: 10px 0;
 	.avatar {
 		height: 100px;
     width: 100px;
     margin: 25px 50px;
     border-radius: 50%;
-		transition: all 1s;
-		box-shadow: 0 0 5px 0 #000;
+		transition: all .3s;
+		box-shadow: 0 0 1px 0 #000;
 		&:hover {
 			transform: scale(1.5);
 		}

@@ -7,6 +7,7 @@ export const Header = styled.div`
 
 export const Logo = styled.div`
 	width: 200px;
+	min-width: 200px;
 	height: 60px;
 	line-height: 60px;
 	text-align: center;
