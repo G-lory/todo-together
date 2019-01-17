@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react';
 
-class TaskItem extends React.Component {
+class TaskItem extends PureComponent {
 	handleDragStart = (e) => {
 		this.props.onDragStart(this.props.id);
 	}

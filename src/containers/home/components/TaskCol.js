@@ -3,7 +3,7 @@ import React, { PureComponent } from 'react';
 import { STATUS_CODE } from '../../../constants/task';
 
 
-class TaskCol extends React.Component {
+class TaskCol extends PureComponent {
 	state = {
 		in: false
 	}

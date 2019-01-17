@@ -1,11 +1,11 @@
-import React, { PureComponent } from 'react';
-import { HomeWrapper } from './style';
+import React from 'react';
+// import { HomeWrapper } from './style';
 import TaskItem from './components/TaskItem';
 import TaskCol from './components/TaskCol';
 import './index.css';
 import { Button } from 'antd';
 
-import { STATUS_TODO, STATUS_DOING, STATUS_DONE, STATUS_CODE } from '../../constants/task';
+import { STATUS_TODO, STATUS_CODE } from '../../constants/task';
 
 let tasks = [{
 		id: 0,
@@ -17,7 +17,7 @@ let tasks = [{
 		id: 1,
 		status: STATUS_TODO,
 		title: '每周七天健身4次，每次健身时间需要大于20分钟',
-		username: '橘子🍊',
+		username: '橘子',
 		point: 5
 }, {
 		id: 2,
@@ -79,7 +79,7 @@ class TaskPanel extends React.Component {
 	
 	render() {
 		let { tasks, activeId } = this.state;
-		let { onDragStart, onDragEnd, cancelSelect } = this;
+		let { onDragStart, cancelSelect } = this;
 		return (
 			<div className="task-wrapper">
 				<Button type="primary">btn</Button>

@@ -21,7 +21,7 @@ class DashBoard extends PureComponent {
 						<Card color="#ff9a00">
 							<i className="iconfont">&#xe692;</i>
 							<span className="title">完成度最高</span>
-							<h2 className="content">80%(橘子🍊)</h2>
+							<h2 className="content">80%(橘子<span role="img" aria-label="juzi">🍊</span>)</h2>
 						</Card>
 					</FirstRowCol>
 					<FirstRowCol>
