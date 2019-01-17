@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
 import './statics/iconfont/iconfont.css';
-import { GlobalStyle } from './style'
+import { GlobalStyle } from './style';
 
 ReactDOM.render(
 	<React.Fragment>

@@ -3,6 +3,7 @@ import { HomeWrapper } from './style';
 import TaskItem from './components/TaskItem';
 import TaskCol from './components/TaskCol';
 import './index.css';
+import { Button } from 'antd';
 
 import { STATUS_TODO, STATUS_DOING, STATUS_DONE, STATUS_CODE } from '../../constants/task';
 
@@ -81,6 +82,7 @@ class TaskPanel extends React.Component {
 		let { onDragStart, onDragEnd, cancelSelect } = this;
 		return (
 			<div className="task-wrapper">
+				<Button type="primary">btn</Button>
 				{
 					Object.keys(STATUS_CODE).map(status => 
 						<TaskCol 
