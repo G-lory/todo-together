@@ -5,13 +5,12 @@ import Home from '../home';
 import TaskList from '../tasklist';
 import Dashboard from '../dashboard';
 import User from '../user';
-import { Header, Logo, Main, Section } from './style';
-
+import { LayoutWrapper, Header, Logo, Main, Section } from './style';
 
 class Layout extends React.PureComponent {
 	render() {
 		return (
-			<div>
+			<LayoutWrapper>
 				<Header>
 					<Logo>
 						<i className="iconfont">&#xe638;</i>todo together
@@ -26,9 +25,10 @@ class Layout extends React.PureComponent {
 						<Route path='/user' exact component={User}></Route>
 					</Section>
 				</Main>
-			</div>
+			</LayoutWrapper>
 		);
 	}
 }
+
 
 export default Layout;

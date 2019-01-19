@@ -1,7 +1,13 @@
 import styled from 'styled-components';
 
+export const LayoutWrapper = styled.div`
+	position: relative;
+`;
+
 export const Header = styled.div`
+	position: fixed;
 	height: 60px;
+	width: 100%;
 	background: #7ed3b2;
 `;
 
