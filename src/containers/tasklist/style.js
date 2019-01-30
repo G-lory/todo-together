@@ -54,24 +54,3 @@ export const TaskItem = styled.div`
     color: #cacaca;
 	}
 `;
-
-export const AddTaskButton = styled.a`
-	color: #fff;
-	background: #28cc89;
-	padding: 10px 20px;
-	border-radius: 3px;
-	font-size: 15px;
-	display: inline-block;
-	outline: none;
-	margin: 10px 0;
-	line-height: 16px;
-	&:hover {
-		background: #7ad0ad;
-	}
-	&:active {
-		background: #00b563;
-	}
-	.iconfont {
-		margin-right: 10px;
-	}
-`;

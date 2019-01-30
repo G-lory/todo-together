@@ -3,11 +3,13 @@ const {
   override,
   fixBabelImports,
   addLessLoader,
-	addWebpackAlias
+	addWebpackAlias,
+  addBabelPlugins
 } = require("customize-cra");
 
 
 module.exports = override(
+  ...addBabelPlugins(["@babel/plugin-proposal-decorators", { "legacy": true }]),
   fixBabelImports("import", {
     libraryName: "antd", libraryDirectory: "es", style: true // change importing css to less
   }),

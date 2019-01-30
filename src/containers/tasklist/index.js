@@ -1,18 +1,111 @@
 import React, { PureComponent } from 'react';
-import { TaskListWrapper, TaskListTitle, TaskItem, AddTaskButton } from './style';
+import { TaskListWrapper, TaskListTitle, TaskItem } from './style';
+import { Button, Modal, Form, Input, InputNumber, Select } from 'antd';
+
+const Option = Select.Option;
+const { TextArea } = Input;
+
+@Form.create()
+class CollectionCreateForm extends PureComponent {
+  render() {
+    const {
+      visible, onCancel, onCreate, form,
+    } = this.props;
+    const { getFieldDecorator } = form;
+    const formItemLayout = {
+      labelCol: { span: 4 },
+      wrapperCol: { span: 18 },
+    };
+    return (
+      <Modal
+        visible={visible}
+        title="新建任务"
+        onCancel={onCancel}
+        onOk={onCreate}
+      >
+        <Form layout='horizontal'>
+          <Form.Item label="标题" {...formItemLayout}>
+            {getFieldDecorator('title', {
+              rules: [{ required: true, message: '请输入标题' }],
+            })(
+              <Input />
+            )}
+          </Form.Item>
+          <Form.Item label="成就点" {...formItemLayout}>
+            {getFieldDecorator('point')(
+              <InputNumber min={1} max={10} />
+            )}
+          </Form.Item>
+          <Form.Item label="优先级" {...formItemLayout}>
+            {getFieldDecorator('level')(
+              <Select
+                placeholder="请选择"
+              >
+                <Option value="1">非常重要</Option>
+                <Option value="2">重要</Option>
+                <Option value="3">一般</Option>
+                <Option value="4">不重要</Option>
+              </Select>
+            )}
+          </Form.Item>
+          <Form.Item label="详细内容" {...formItemLayout}>
+            {getFieldDecorator('description')(
+              <TextArea rows={4} />
+            )}
+          </Form.Item>
+        </Form>
+      </Modal>
+    );
+  }
+}
 
 class TaskList extends PureComponent {
+  state = {
+    visible: false,
+  };
+
+  showModal = () => {
+    this.setState({ visible: true });
+  }
+
+  handleCancel = () => {
+    this.setState({ visible: false });
+  }
+
+  handleCreate = () => {
+    const form = this.formRef.props.form;
+    form.validateFields((err, values) => {
+      if (err) {
+        return;
+      }
+
+      console.log('Received values of form: ', values);
+      form.resetFields();
+      this.setState({ visible: false });
+    });
+  }
+
+  saveFormRef = (formRef) => {
+    this.formRef = formRef;
+  }
+
+
 	render() {
 		return (
 			<TaskListWrapper>
 				<TaskListTitle>
 					任务列表
 				</TaskListTitle>
+        <CollectionCreateForm
+          wrappedComponentRef={this.saveFormRef}
+          visible={this.state.visible}
+          onCancel={this.handleCancel}
+          onCreate={this.handleCreate}
+        />
 				<div>
-					<AddTaskButton>
-						<i className="iconfont delete">&#xe683;</i>
-						添加新任务
-					</AddTaskButton>
+					<Button type="primary" icon="plus" onClick={this.showModal}>
+            添加新任务
+          </Button>
 				</div>
 				<TaskItem>
 					<span className="cr unchecked">
