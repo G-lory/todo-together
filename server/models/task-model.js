@@ -1,7 +1,7 @@
 const sqlite3 = require('sqlite3').verbose();
 const path = require('path');
 
-let db = new sqlite3.Database(path.join(__dirname, '../db/todo_together.db'), (err) => {
+let db = new sqlite3.Database(path.join(__dirname, '../todo_together.db'), (err) => {
   if (err) {
     console.error(err.message);
   }
@@ -35,6 +35,11 @@ function queryTasks() {
       }
     });
   })
+}
+
+module.exports = {
+  createTask,
+  queryTasks
 }
 
 // createTask({

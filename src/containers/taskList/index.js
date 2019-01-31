@@ -1,15 +1,17 @@
 import React, { PureComponent } from 'react';
+import { connect } from 'react-redux';
 import { TaskListWrapper, TaskListTitle, TaskItem } from './style';
 import { Button, Modal, Form, Input, InputNumber, Select } from 'antd';
+import { actionCreators } from './store';
 
 const Option = Select.Option;
 const { TextArea } = Input;
 
 @Form.create()
-class CollectionCreateForm extends PureComponent {
+class TaskCreateForm extends PureComponent {
   render() {
     const {
-      visible, onCancel, onCreate, form,
+      visible, onCancel, onCreate, form
     } = this.props;
     const { getFieldDecorator } = form;
     const formItemLayout = {
@@ -32,19 +34,25 @@ class CollectionCreateForm extends PureComponent {
             )}
           </Form.Item>
           <Form.Item label="成就点" {...formItemLayout}>
-            {getFieldDecorator('point')(
-              <InputNumber min={1} max={10} />
+            {getFieldDecorator('point', {
+              rules: [{ required: true, message: '请输入成就点' }],
+              initialValue: 1
+            })(
+              <InputNumber min={1} max={20} />
             )}
           </Form.Item>
           <Form.Item label="优先级" {...formItemLayout}>
-            {getFieldDecorator('level')(
+            {getFieldDecorator('level', {
+              rules: [{ required: true, message: '请选择优先级' }],
+              initialValue: 3
+            })(
               <Select
                 placeholder="请选择"
               >
-                <Option value="1">非常重要</Option>
-                <Option value="2">重要</Option>
-                <Option value="3">一般</Option>
-                <Option value="4">不重要</Option>
+                <Option value={1}>非常重要</Option>
+                <Option value={2}>重要</Option>
+                <Option value={3}>一般</Option>
+                <Option value={4}>不重要</Option>
               </Select>
             )}
           </Form.Item>
@@ -59,17 +67,31 @@ class CollectionCreateForm extends PureComponent {
   }
 }
 
+@connect(
+  state => ({
+    visible: state.getIn(['taskList', 'formVisible']),
+    tasks: state.getIn(['taskList', 'tasks'])
+  }),
+  dispatch => {
+    console.log(dispatch)
+    return ({
+      changeModalShow(visible) {
+        dispatch(actionCreators.changeModalShow(visible));
+      },
+      createTask(task) {
+        return dispatch(actionCreators.createTask(task));
+      }
+    })
+  }
+)
 class TaskList extends PureComponent {
-  state = {
-    visible: false,
-  };
 
   showModal = () => {
-    this.setState({ visible: true });
+    this.props.changeModalShow(true);
   }
 
   handleCancel = () => {
-    this.setState({ visible: false });
+    this.props.changeModalShow(false);
   }
 
   handleCreate = () => {
@@ -78,10 +100,11 @@ class TaskList extends PureComponent {
       if (err) {
         return;
       }
+      this.props.createTask(values);
 
-      console.log('Received values of form: ', values);
-      form.resetFields();
-      this.setState({ visible: false });
+      // this.setState({ visible: false });
+      // form.resetFields();
+
     });
   }
 
@@ -89,16 +112,16 @@ class TaskList extends PureComponent {
     this.formRef = formRef;
   }
 
-
 	render() {
+    const { tasks, visible } = this.props;
 		return (
 			<TaskListWrapper>
 				<TaskListTitle>
 					任务列表
 				</TaskListTitle>
-        <CollectionCreateForm
+        <TaskCreateForm
           wrappedComponentRef={this.saveFormRef}
-          visible={this.state.visible}
+          visible={visible}
           onCancel={this.handleCancel}
           onCreate={this.handleCreate}
         />
@@ -107,24 +130,19 @@ class TaskList extends PureComponent {
             添加新任务
           </Button>
 				</div>
-				<TaskItem>
-					<span className="cr unchecked">
-						<i className="iconfont">&#xe661;</i>
-					</span>
-					<span className="task-title">
-						写英语作业
-					</span>
-					<i className="iconfont delete">&#xe605;</i>
-				</TaskItem>
-				<TaskItem>
-					<span className="cr checked">
-						<i className="iconfont">&#xe661;</i>
-					</span>
-					<span className="task-title checked">
-						写语文作业
-					</span>
-					<i className="iconfont delete">&#xe605;</i>
-				</TaskItem>
+        {
+          tasks.map(task => (
+            <TaskItem key={task.get('id')}>
+              <span className="cr unchecked">
+                <i className="iconfont">&#xe661;</i>
+              </span>
+              <span className="task-title">
+                { task.get('title') }
+              </span>
+              <i className="iconfont delete">&#xe605;</i>
+            </TaskItem>
+          ))
+        }
 			</TaskListWrapper>
 		)
 	}

@@ -2,11 +2,11 @@ import React from 'react';
 import Menu from './components/Menu';
 import { Route } from 'react-router-dom';
 import Home from '../home';
-import TaskList from '../tasklist';
+import TaskList from '../taskList';
 import User from '../user';
 import Forum from '../forum';
 import { LayoutWrapper, Header, Logo, Main } from './style';
-import asyncComponent from 'components/AsyncComponent';
+import asyncComponent from '@components/AsyncComponent';
 
 // 尝试引入异步组件 react.lazy 返回一个 function Route 不识别...
 // const Dashboard = lazy(() => import('../dashboard'));

@@ -2,7 +2,7 @@ const sqlite3 = require('sqlite3').verbose();
 const path = require('path');
 
 // 创建数据库 todo_together
-let tasks_db = new sqlite3.Database(path.join(__dirname, '../db/todo_together.db'), (err) => {
+let tasks_db = new sqlite3.Database(path.join(__dirname, '../todo_together.db'), (err) => {
   if (err) {
     console.error(err.message);
   }
