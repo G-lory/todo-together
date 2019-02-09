@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const { createTask } = require('./controllers/taskController');
+const { createTask, queryTask } = require('./controllers/taskController');
 router.use((req, res, next) => {
   // 任何路由信息都会执行这里面的语句
   console.log(req.body, req.path, req.query);
@@ -9,5 +9,6 @@ router.use((req, res, next) => {
   next();
 })
 router.post('/createTask', createTask);
+router.get('/queryTask', queryTask);
 
 module.exports = router;

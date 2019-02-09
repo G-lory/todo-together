@@ -13,6 +13,7 @@ service.interceptors.response.use(
     if (!data.success) {
       message.warning(data.msg || '请求出错');
     }
+    console.log('>>>', data)
     return data; // 获取返回结果的 data
   },
   error => {

@@ -1,11 +1,40 @@
-function createTask(req, res) {
-  console.log(req.body)
+const taskModel = require('../models/task-model');
+const { timeFormat } = require('../util');
 
-  res.json({
-    success: true
-  });
+function createTask(req, res) {
+  // console.log(req.body)
+  let params = req.body;
+  params.createTime = params.updateTime = timeFormat(new Date());
+  console.log(params);
+  taskModel.createTask(params).then(r => {
+    res.json({
+      success: true
+    });
+  }).catch(e => {
+    res.json({
+      success: false,
+      message: e
+    });
+  })
+}
+
+function queryTask(req, res) {
+  let params = req.query;
+  console.log(params);
+  taskModel.queryTasks(params).then(r => {
+    res.json({
+      success: true,
+      rows: r
+    });
+  }).catch(e => {
+    res.json({
+      success: false,
+      message: e
+    });
+  })
 }
 
 module.exports = {
-  createTask
+  createTask,
+  queryTask
 }

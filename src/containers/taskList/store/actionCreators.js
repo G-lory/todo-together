@@ -6,10 +6,16 @@ export const createTask = (task) => {
     taskService.createTask(task).then(res => {
       if (res.success) {
         dispatch(changeModalShow(false));
-        return true;
+        queryTask();
+        return res;
       }
-      return false;
     });
+}
+
+export const queryTask = (task) => {
+  taskService.queryTask().then(res => {
+    console.log(res)
+  });
 }
 
 export const changeModalShow = (visible) => ({

@@ -7,3 +7,10 @@ export function createTask(task) {
     data: task
   })
 }
+
+export function queryTask() {
+  return request({
+    url: '/queryTask',
+    method: 'get'
+  })
+}

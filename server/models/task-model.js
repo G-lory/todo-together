@@ -8,7 +8,7 @@ let db = new sqlite3.Database(path.join(__dirname, '../todo_together.db'), (err)
   console.log('Connected to the backlog_tasks database.');
 });
 
-function createTask({ title, author, content, point, level, status, createTime, updateTime }) {
+function createTask({ title, author = null, content = null, point, level, status = 1, createTime, updateTime }) {
   return new Promise(function (resolve, reject) {
     const sql = `INSERT INTO backlog_tasks(title, author, content, point, level, status, create_time, update_time)
       VALUES('${title}', '${author}', '${content}', ${point}, ${level}, ${status}, '${createTime}', '${updateTime}')`;

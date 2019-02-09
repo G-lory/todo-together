@@ -73,7 +73,6 @@ class TaskCreateForm extends PureComponent {
     tasks: state.getIn(['taskList', 'tasks'])
   }),
   dispatch => {
-    console.log(dispatch)
     return ({
       changeModalShow(visible) {
         dispatch(actionCreators.changeModalShow(visible));
@@ -100,7 +99,9 @@ class TaskList extends PureComponent {
       if (err) {
         return;
       }
-      this.props.createTask(values);
+      this.props.createTask(values).then(res => {
+        console.log(res)
+      })
 
       // this.setState({ visible: false });
       // form.resetFields();
