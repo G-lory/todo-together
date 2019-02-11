@@ -23,9 +23,13 @@ function createTask({ title, author = null, content = null, point, level, status
 }
 
 // all 直接获取所有结果、 get 只获取第一行、 each 分别对每一行执行回调函数
-function queryTasks() {
+function queryTasks(params) {
   return new Promise(function (resolve, reject) {
-    const sql = `SELECT * FROM backlog_tasks`;
+    let sql = ` SELECT * FROM backlog_tasks `;
+    let { page, size } = params;
+    if (page && size) {
+      sql += ` limit ${(page - 1) * size}, ${size} `;
+    }
 
     db.all(sql, (err, rows) => {
       if (err) {

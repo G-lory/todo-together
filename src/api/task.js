@@ -8,9 +8,13 @@ export function createTask(task) {
   })
 }
 
-export function queryTask() {
+export function queryTasks(params) {
+  let pUrl;
+  if (params) {
+    pUrl = Object.keys(params).map(key => key + '=' + params[key]).join('&');
+  }
   return request({
-    url: '/queryTask',
+    url: '/queryTasks' + pUrl ? '?' + pUrl : '',
     method: 'get'
   })
 }
